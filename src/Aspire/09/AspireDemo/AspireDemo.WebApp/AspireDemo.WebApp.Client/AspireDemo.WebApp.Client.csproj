@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Shared\AspireDemo.Components\AspireDemo.Components\AspireDemo.Components.csproj" />
+  </ItemGroup>
+
 </Project>

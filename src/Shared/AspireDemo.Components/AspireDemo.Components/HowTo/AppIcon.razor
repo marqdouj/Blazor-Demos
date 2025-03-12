@@ -1,0 +1,42 @@
+﻿<FluentLayout>
+    <FluentHeader>How To: Use a Custom Image For Browser Pages</FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <p style="margin:3px;">
+            This demo uses a custom razor class library (RCL) <code>AspireDemo.Components</code>
+            to hold shared images/components.
+            <br />
+            A SVG image from the FluentUI library was download, placed in the wwwroot folder of the RCL, and renamed to AppIcon.svg.
+            <br />
+            <br />
+            <FluentAnchor Target="_blank" Href="https://github.com/microsoft/fluentui-system-icons/tree/main/assets">
+                FluentUI Images
+            </FluentAnchor>
+            <br />
+            <br />
+            Your image should be square, and normally a size of 16x16 (medium) or 24x24 (large).
+            <br />
+            (Note: the favicon.png that ships with the Blazor template is 32x32).
+        </p>
+
+        <p>
+            In the <code> App.razor </code> file,
+            <br />
+            replace:
+            <br />
+            <code>link rel="icon" type="image/png" href="favicon.png"</code>
+            <br />
+            with:
+            <br />
+            <code>rel="icon" type="image/svg" href="./_content/AspireDemo.Components/AppIcon.svg"</code>
+        </p>
+
+        <p>
+            Note: if no longer required, you can delete the existing favicon.png.
+        </p>
+    </FluentStack>
+</FluentLayout>
+
+@code {
+
+}
