@@ -10,13 +10,24 @@
     <FluentStack Orientation="Orientation.Vertical" >
         <FluentLabel Typo="Typography.H1">Welcome to my Blazor Aspire demo.</FluentLabel>
 
-        <FluentStack VerticalAlignment="VerticalAlignment.Center">
-            <FluentLabel Typo="Typography.H5">
-                Some of the demos use my custom NuGet packages. The project websites are hosted on
-            </FluentLabel>
-            <FluentAnchor Href="https://github.com/marqdouj" Target="_blank">
-                GitHub
-            </FluentAnchor>
+        <FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Center">
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel Typo="Typography.H5">
+                    My NuGet packages are listed on
+                </FluentLabel>
+                <FluentAnchor Href="https://www.nuget.org/packages?q=marqdouj" Target="_blank">
+                    NuGet
+                </FluentAnchor>
+            </FluentStack>
+
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel Typo="Typography.H5">
+                    My projects are listed on 
+                </FluentLabel>
+                <FluentAnchor Href="https://github.com/marqdouj" Target="_blank">
+                    GitHub
+                </FluentAnchor>
+            </FluentStack>
         </FluentStack>
     </FluentStack>
 </FluentLayout>

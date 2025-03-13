@@ -1,6 +1,6 @@
 ﻿using Marqdouj.CLRCommon;
 
-namespace AspireDemo.WebApp.Client.Pages
+namespace AspireDemo.WebApp.Client.Pages.HowTo
 {
     public class CounterState : StateContainer
     {

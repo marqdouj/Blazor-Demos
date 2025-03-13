@@ -1,4 +1,4 @@
-﻿using AspireDemo.WebApp.Client.Pages;
+﻿using AspireDemo.WebApp.Client.Pages.HowTo;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.FluentUI.AspNetCore.Components;
 

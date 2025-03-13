@@ -1,5 +1,5 @@
 using AspireDemo.ApiClient;
-using AspireDemo.WebApp.Client.Pages;
+using AspireDemo.WebApp.Client.Pages.HowTo;
 using AspireDemo.WebApp.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 
