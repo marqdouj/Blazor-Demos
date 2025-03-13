@@ -3,6 +3,7 @@ using AspireDemo.WebApp.Client.Pages.HowTo;
 using AspireDemo.WebApp.Components;
 using Marqdouj.Html.Geolocation;
 using Marqdouj.Html.Geolocation.Models;
+using Marqdouj.Html.ResizeObserver;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ builder.Services.AddHttpClient<IApiServiceClient, ApiServiceClient>(client =>
     client.BaseAddress = new("https+http://apiservice");
 });
 
+builder.Services.AddScoped<ResizeObserverService>();
 builder.Services.AddScoped<IGeolocationService, GeolocationService>();
 builder.Services.AddScoped<CounterState>();
 
