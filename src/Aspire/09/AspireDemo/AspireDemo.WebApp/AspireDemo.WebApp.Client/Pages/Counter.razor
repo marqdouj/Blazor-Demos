@@ -1,26 +1,81 @@
 ﻿@page "/counter"
+@using System.Text.Encodings.Web
 @rendermode InteractiveAuto
+@inject CounterState State
 
 <PageTitle>Counter</PageTitle>
 
 <FluentLayout>
     <FluentHeader>Counter</FluentHeader>
-
+    
     <FluentStack Orientation="Orientation.Vertical">
+        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+            <FluentLabel Typo="Typography.H5">This component demonstrates using an </FluentLabel>
+            <FluentAnchor Href="https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-9.0&pivots=webassembly#in-memory-state-container-service"
+                          Target="_blank">
+                In-Memory State Container
+            </FluentAnchor>
+            <FluentLabel Typo="Typography.H5"> to preserve the count when navigating between pages.</FluentLabel>
+        </FluentStack>
+
         <div role="status" style="padding-bottom: 1em;margin-top:5px;">
             Current count: <FluentBadge Appearance="Appearance.Neutral">@currentCount</FluentBadge>
         </div>
 
         <FluentButton Appearance="Appearance.Accent" @onclick="IncrementCount">Click me</FluentButton>
+
+        <FluentCard>
+            <FluentLabel Typo="Typography.H5">Code Behind</FluentLabel>
+            <br />
+            @markupString
+
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel Typo="Typography.Body">StateContainer.cs is part of my custom NuGet package </FluentLabel>
+                <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.CLRCommon/"
+                              Target="_blank">
+                    Marqdouj.CLRCommon
+                </FluentAnchor>
+            </FluentStack>
+        </FluentCard>
     </FluentStack>
 
 </FluentLayout>
 
 @code {
-    private int currentCount = 0;
+    private int currentCount => State.CurrentCount;
+    private MarkupString? markupString = CreateMarkup();
 
     private void IncrementCount()
     {
-        currentCount++;
+        State.CurrentCount++;
+    }
+
+    private static MarkupString CreateMarkup()
+    {
+        var code = new System.Text.StringBuilder();
+        code.AppendLine("Program.cs");
+        code.AppendLine("  builder.Services.AddScoped<CounterState>();"); 
+        code.AppendLine();
+        code.AppendLine("Counter.razor");
+        code.AppendLine("  @inject CounterState State");
+        code.AppendLine("...");
+        code.AppendLine("  private int currentCount => State.CurrentCount;");
+        code.AppendLine();
+        code.AppendLine("  private void IncrementCount()");
+        code.AppendLine("  {");
+        code.AppendLine("      State.CurrentCount++;");
+        code.AppendLine("  }");
+        code.AppendLine();
+        code.AppendLine("CounterState.cs");
+        code.AppendLine("using Marqdouj.CLRCommon;");
+        code.AppendLine("...");
+        code.AppendLine("  public class CounterState : StateContainer");
+        code.AppendLine("  {");
+        code.AppendLine("      public int CurrentCount { get; set; }");
+        code.AppendLine("  }");
+
+        var encodedCode = HtmlEncoder.Default.Encode(code.ToString());
+
+        return new MarkupString($"<pre><code>{encodedCode}</code></pre>");
     }
 }

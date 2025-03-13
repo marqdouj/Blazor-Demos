@@ -1,4 +1,5 @@
 using AspireDemo.ApiClient;
+using AspireDemo.WebApp.Client.Pages;
 using AspireDemo.WebApp.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 
@@ -20,6 +21,8 @@ builder.Services.AddHttpClient<IApiServiceClient, ApiServiceClient>(client =>
     // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
     client.BaseAddress = new("https+http://apiservice");
 });
+
+builder.Services.AddScoped<CounterState>();
 
 var app = builder.Build();
 
