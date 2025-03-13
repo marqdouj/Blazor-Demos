@@ -1,6 +1,7 @@
 ﻿@page "/weather"
 @using System.Text.Encodings.Web
 @rendermode InteractiveServer
+@implements IDisposable
 @attribute [OutputCache(Duration = 5)]
 @inject PersistentComponentState PersistentState
 @inject IApiServiceClient WeatherApi
@@ -75,6 +76,11 @@
         });
 
         loading = false;
+    }
+
+    public void Dispose()
+    {
+        subscription?.Dispose();
     }
 
     private static MarkupString CreateMarkup()
