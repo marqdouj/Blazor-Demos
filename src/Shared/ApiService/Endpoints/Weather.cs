@@ -1,6 +1,6 @@
 ﻿using AspireDemo.ApiClient.Models;
 
-namespace AspireDemo.ApiService.EndPoints
+namespace AspireDemo.ApiService.Endpoints
 {
     internal static class Weather
     {

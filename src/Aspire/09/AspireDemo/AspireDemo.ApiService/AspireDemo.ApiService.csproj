@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>b7f1faac-8ecd-46c2-8118-447cc1a25921</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,11 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Communication.Email" Version="1.1.0-beta.2" />
+	<PackageReference Include="Marqdouj.Aspire.MailKit.Client" Version="8.1.0" />
+	<PackageReference Include="Marqdouj.CLRCommon" Version="8.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Endpoints\" />
   </ItemGroup>
 
 </Project>

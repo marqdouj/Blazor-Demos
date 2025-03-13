@@ -1,0 +1,57 @@
+﻿@page "/nuget-email"
+
+@rendermode InteractiveServer
+
+<PageTitle>Email</PageTitle>
+
+<FluentLayout>
+    <FluentHeader>Email Service</FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentLabel Typo="Typography.H5">
+            This page demonstrates a development mode email service using MailDev/MailKit.
+            I have created RCL wrappers around them to work with .NET Aspire
+        </FluentLabel>
+        <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.MailDev.Host/"
+                      Target="_blank">
+            NuGet MailDev
+        </FluentAnchor>
+        <FluentAnchor Href="https://github.com/marqdouj/Marqdouj.MailDev"
+                      Target="_blank">
+            GitHub MailDev
+        </FluentAnchor>
+        <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.Aspire.MailKit.Client/"
+                      Target="_blank">
+            NuGet MailKit
+        </FluentAnchor>
+        <FluentAnchor Href="https://github.com/marqdouj/Marqdouj.MailKit"
+                      Target="_blank">
+            GitHub MailKit
+        </FluentAnchor>
+
+        <FluentLabel Typo="Typography.H5">Open up the <code>'MailDev'</code> resource to view emails</FluentLabel>
+        <FluentLabel Typo="Typography.H5">
+            The code behind is also configured to run Azure email in production (if configured).
+        </FluentLabel>
+
+        <br />
+
+        <FluentLabel>@subscribedMessage</FluentLabel>
+        <Newsletter SubscribeChanged="@OnSubscribeChanged" />
+    </FluentStack>
+</FluentLayout>
+
+<FluentStack Orientation="Orientation.Vertical">
+
+</FluentStack>
+
+@code {
+    private bool subscribed;
+    private string subscribedMessage => subscribed ? "Thank you for subscribing to our newsletter." : "Please subscribe to our newsletter.";
+
+    private void OnSubscribeChanged(bool value)
+    {
+        subscribed = value;
+        StateHasChanged();
+    }
+}
