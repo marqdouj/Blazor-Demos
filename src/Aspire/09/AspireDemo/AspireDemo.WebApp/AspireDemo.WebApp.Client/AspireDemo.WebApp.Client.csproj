@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Marqdouj.CLRCommon" Version="8.8.0" />
     <PackageReference Include="Marqdouj.FluentUI" Version="9.0.1" />
+    <PackageReference Include="Marqdouj.Html.Geolocation" Version="8.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.3" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.6" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.6" />
