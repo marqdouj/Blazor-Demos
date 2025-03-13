@@ -5,29 +5,28 @@ namespace AspireDemo.ApiClient
 {
     public interface IWeatherClient
     {
-        Task<IQueryable<WeatherForecast>?> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default);
+        Task<List<WeatherForecast>> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default);
     }
 
     internal class WeatherClient(HttpClient httpClient) : IWeatherClient
     {
-        public async Task<IQueryable<WeatherForecast>?> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default)
+        public async Task<List<WeatherForecast>> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default)
         {
-            List<WeatherForecast>? forecasts = null;
+            List<WeatherForecast>? forecasts = [];
 
             await foreach (var forecast in httpClient.GetFromJsonAsAsyncEnumerable<WeatherForecast>("/weather-forecast", cancellationToken))
             {
-                if (forecasts?.Count >= maxItems)
+                if (forecasts.Count >= maxItems)
                 {
                     break;
                 }
                 if (forecast is not null)
                 {
-                    forecasts ??= [];
                     forecasts.Add(forecast);
                 }
             }
 
-            return forecasts?.AsQueryable();
+            return forecasts;
         }
     }
 }
