@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\..\..\Shared\ApiService\Endpoints\Weather.cs" Link="Endpoints\Weather.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AspireDemo.ApiClient\AspireDemo.ApiClient.csproj" />
     <ProjectReference Include="..\AspireDemo.ServiceDefaults\AspireDemo.ServiceDefaults.csproj" />
   </ItemGroup>

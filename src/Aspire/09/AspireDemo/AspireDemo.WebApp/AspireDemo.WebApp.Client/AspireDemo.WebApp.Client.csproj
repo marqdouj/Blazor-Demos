@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Shared\AspireDemo.Components\AspireDemo.Components\AspireDemo.Components.csproj" />
+    <ProjectReference Include="..\..\AspireDemo.Components\AspireDemo.Components.csproj" />
   </ItemGroup>
 
 </Project>
