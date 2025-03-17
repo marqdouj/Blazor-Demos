@@ -1,0 +1,224 @@
+﻿@using AspireDemo.Components.Other.Canvas.Clock
+@using AspireDemo.Components.Other.Canvas.Range
+@inject CanvasDemoState State
+@implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
+@inject ILogger<CanvasDemo> Logger
+@inject IToastService ToastService
+
+<FluentLayout>
+    <FluentHeader>Html Canvas</FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentToolbar>
+            <FluentSwitch @bind-Value=@State.Narrative Label="@narrativeLabel" Style="margin-top:3px;" />
+        </FluentToolbar>
+        <FluentLabel hidden="@hideNarrative" Typo="Typography.Subject">
+            This is a demo of one scenario where you could use the Html Canvas element.<br />
+            The canvas represents an Oil/Gas pipeline. <br />
+            The images represent defects along that pipeline
+            that were gathered using inspection tools.<br />
+            The images are preloaded SVGs. Preloading is required to draw the images on the canvas in
+            the correct ZOrder.
+        </FluentLabel>
+
+        <div style="width:100%;overflow-x:auto;">
+            <div class="container">
+                <div style="@clockStyle">
+                    <FluentSlider Orientation="Orientation.Vertical"
+                                  @bind-Value="@OClock"
+                                  TValue="double"
+                                  Min="0" Max="360" Step="1"
+                                  Style="min-width:.25rem;width:.25rem;height:100%;" />
+                </div>
+
+                <div style="width:100%;overflow-x:auto;">
+                    <canvas id="@pipeDisplay.Id" height="@pipeSettings.Height" width="@pipeSettings.Width" style="background: linear-gradient(to bottom, DarkGray, White, DarkGray);">
+                        Sorry, your browser does not support the canvas element.
+                    </canvas>
+                </div>
+
+                <div />
+
+                <div>
+                    <FluentStack HorizontalAlignment="HorizontalAlignment.Center">
+                        <FluentButton Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size16.ArrowPrevious())" @onclick="@(() => ScrollRange(RangeDirection.Upstream))" Title="Upstream" />
+                        <FluentButton Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size16.ArrowNext())" @onclick="@(() => ScrollRange(RangeDirection.Downstream))" Title="Downstream" />
+                    </FluentStack>
+                </div>
+
+                <div />
+
+                <FluentDataGrid Items="@Data" GenerateHeader="GenerateHeaderOption.Sticky" Style="@gridStyle" AutoFit="true">
+                    <ChildContent>
+                        <PropertyColumn Title="@DFSTitle" Property="@(c => c!.DFS)" Format="0.00" />
+                        <PropertyColumn Title="@LengthTitle" Property="@(c => c!.Length)" Format="0.00" />
+                        <PropertyColumn Title="@WidthTitle" Property="@(c => c!.Width)" Format="0.00" />
+                        <PropertyColumn Title="O'CLock" Property="@(c => c!.ClockText)" />
+                        <TemplateColumn Title="Event">
+                            <div class="flex items-center">
+                                <img class="grid-img" src="./_content/AspireDemo.Components/canvas/@(context.Group.ToString()).svg" alt="@(context.Group)" />
+                                <nobr>
+                                    <strong>@context.Group.ToString()</strong>
+                                </nobr>
+                            </div>
+                        </TemplateColumn>
+                        <TemplateColumn>
+                            <FluentButton IconStart="@(new Icons.Regular.Size20.PipelineArrowCurveDown())" @onclick="@(() => GoToEvent(context))" Title="Find" />
+                        </TemplateColumn>
+                    </ChildContent>
+                    <LoadingContent>Loading...</LoadingContent>
+                    <EmptyContent>No data</EmptyContent>
+                </FluentDataGrid>
+            </div>
+        </div>
+    </FluentStack>
+</FluentLayout>
+
+@* Preload all svg images to ensure they draw on the canvas in the correct ZOrder *@
+<div hidden>
+    @foreach (var g in eventGroups)
+    {
+        <img id="svg-@(g.ToString())" src="./_content/AspireDemo.Components/canvas/@(g.ToString()).svg" loading="eager" />
+    }
+</div>
+
+@code {
+    private PipeJsInterop? module;
+    private bool hideNarrative => !State.Narrative;
+    private string narrativeLabel => State.Narrative ? "Hide Narrative" : "Show Narrative";
+    private PipeSettings pipeSettings = new();
+    private string clockStyle => $"height:{pipeSettings.Height}px;padding-top:1rem;padding-bottom:1rem;padding-right:1.25rem;padding-left:.25rem;background-color:azure";
+    private string dfsStyle => $"width:{pipeSettings.Width}px;height:1.75rem;padding-top:.75rem;padding-left:.5rem;padding-right:.5rem;background-color:azure";
+    private string gridStyle => $"width:{pipeSettings.Width}px;height:{pipeSettings.Height}px;overflow: auto; margin-bottom:3px; border: 1px solid black;";
+    private double OClock { get => State.PipeState.Clock.ToDegrees(); set { ClockChanged(value); } }
+    private bool redrawPipe = true;
+    private readonly PipeDisplay pipeDisplay = new();
+    private MinMaxN<double> pipeEventsRange = new(0, 0);
+    private List<PipeEvent> pipeEvents = [];
+    private IQueryable<PipeEvent>? Data => pipeEvents?.AsQueryable();
+    private readonly List<PipeEventGroup> eventGroups = Enum.GetValues<PipeEventGroup>().ToList();
+    private string DFSTitle => $"DFS ({State.PipeState.Range.Unit.ToSuffix()})";
+    private string LengthTitle => $"Length (deg.)";
+    private string WidthTitle => $"Width ({RangeUnit.Inch.ToSuffix()})";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module ??= new(JSRuntime);
+            pipeDisplay.State = State.PipeState;
+
+            try
+            {
+                //TODO: Implement local storage to save/get settings
+                //For demo, change values simulating get from storage
+                pipeSettings = new() { RangeWidth = 25 };
+                State.PipeState.UpdateFromSettings(pipeSettings);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, null);
+            }
+
+            await LoadPipeEvents();
+        }
+
+        if (redrawPipe)
+        {
+            redrawPipe = false;
+            await module!.DrawPipeAsync(pipeDisplay!);
+        }
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        try
+        {
+            if (module != null)
+                await module.DisposeAsync();
+        }
+        catch (JSDisconnectedException)
+        {
+        }
+    }
+
+    private async Task LoadPipeEvents()
+    {
+        var range = new PipeRange(0, 50, 0, State.PipeState.Range.Unit);
+        pipeEvents = await range.GetPipeEvents();
+        pipeEventsRange = range;
+        PipeChanged();
+    }
+
+    private void ClockChanged(double value)
+    {
+        State.PipeState.Clock = new ClockTime(value);
+        PipeChanged();
+    }
+
+    private void ScrollRange(RangeDirection direction)
+    {
+        var range = State.PipeState.Range.Scroll(direction, pipeSettings.RangeScroll);
+
+        if (range.Value < pipeEventsRange.Min)
+        {
+            range = new PipeRange(pipeEventsRange.Min, range.Width, range.Unit);
+        }
+        else if (range.Value > pipeEventsRange.Max)
+        {
+            range = new PipeRange(pipeEventsRange.Max, range.Width, range.Unit);
+        }
+
+        State.PipeState.Range = range;
+        PipeChanged();
+    }
+
+    private void GoToEvent(PipeEvent pipeEvent)
+    {
+        State.PipeState.Clock = new ClockTime(pipeEvent.Clock);
+        State.PipeState.Range = new(pipeEvent.DFS, State.PipeState.Range.Width, State.PipeState.Range.Unit);
+
+        foreach (var item in pipeEvents)
+        {
+            item.IsSelected = item.Id == pipeEvent.Id;
+        }
+
+        PipeChanged();
+    }
+
+    private void PipeChanged()
+    {
+        try
+        {
+            var pixelsPerClock = pipeSettings.Height / State.PipeState.Channels.Value;
+            var pixelsPerUnit = pipeSettings.Width / State.PipeState.Range.Width;
+            var clock = State.PipeState.Clock;
+            var range = pipeDisplay!.Range;
+            var size = new System.Drawing.Size(pipeSettings.Width, pipeSettings.Height);
+            var dfsMin = range.Min;
+            var dfsMax = range.Max;
+            var items = pipeEvents
+                .Where(e =>
+                    (e.DFS >= dfsMin && e.DFS <= dfsMax) ||
+                    (e.DFS <= dfsMin && e.DFS >= dfsMax)
+                )
+                .ToList();
+
+            Logger.LogInformation($"Event Count: {items.Count}");
+            items.UpdateForCanvas(size, clock, range, pixelsPerClock, pixelsPerUnit);
+
+            pipeDisplay.Events = items.OrderBy(e => e.ZIndex).ToList();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, null);
+            ToastService.ShowError(ex.ToMessage());
+        }
+        finally
+        {
+            redrawPipe = true;
+            StateHasChanged();
+        }
+    }
+}
