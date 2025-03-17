@@ -1,4 +1,5 @@
-﻿using AspireDemo.WebApp.Client.Pages.HowTo;
+﻿using AspireDemo.Components.Other.Canvas;
+using AspireDemo.WebApp.Client.Pages.HowTo;
 using Marqdouj.Html.Geolocation;
 using Marqdouj.Html.Geolocation.Models;
 using Marqdouj.Html.ResizeObserver;
@@ -10,6 +11,7 @@ builder.Services.AddFluentUIComponents();
 
 builder.Services.AddScoped<ResizeObserverService>();
 builder.Services.AddScoped<IGeolocationService, GeolocationService>();
+builder.Services.AddScoped<CanvasDemoState>();
 builder.Services.AddScoped<CounterState>();
 
 await builder.Build().RunAsync();

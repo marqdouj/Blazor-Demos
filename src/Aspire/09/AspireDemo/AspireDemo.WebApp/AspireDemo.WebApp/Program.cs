@@ -1,4 +1,5 @@
 using AspireDemo.ApiClient;
+using AspireDemo.Components.Other.Canvas;
 using AspireDemo.WebApp.Client.Pages.HowTo;
 using AspireDemo.WebApp.Components;
 using Marqdouj.Html.Geolocation;
@@ -27,6 +28,7 @@ builder.Services.AddHttpClient<IApiServiceClient, ApiServiceClient>(client =>
 
 builder.Services.AddScoped<ResizeObserverService>();
 builder.Services.AddScoped<IGeolocationService, GeolocationService>();
+builder.Services.AddScoped<CanvasDemoState>();
 builder.Services.AddScoped<CounterState>();
 
 var app = builder.Build();
