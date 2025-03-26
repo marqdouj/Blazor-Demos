@@ -1,0 +1,37 @@
+﻿@page "/nuget-email"
+@rendermode InteractiveAuto
+
+<PageTitle>Email</PageTitle>
+
+<FluentLayout>
+    <FluentHeader>Email Service</FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentLabel Typo="Typography.H5">Rendermode: <code>InteractiveAuto</code> </FluentLabel>
+
+        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+            <FluentIcon Value="@(new Icons.Regular.Size32.Warning().WithColor("darkorange"))" />
+            <FluentLabel Typo="Typography.H5">
+                Under Construction (NOTE: Emails are not actually sent; will not be configured until Aspire supports .NET 10.0.)
+            </FluentLabel>
+        </FluentStack>
+
+        <FluentLabel>@subscribedMessage</FluentLabel>
+        <AspireDemo.Components.MyNuGet.Newsletter SubscribeChanged="@OnSubscribeChanged" />
+    </FluentStack>
+</FluentLayout>
+
+<FluentStack Orientation="Orientation.Vertical">
+
+</FluentStack>
+
+@code {
+    private bool subscribed;
+    private string subscribedMessage => subscribed ? "Thank you for subscribing to our newsletter." : "Please subscribe to our newsletter.";
+
+    private void OnSubscribeChanged(bool value)
+    {
+        subscribed = value;
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,37 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<FluentLayout>
+    <FluentHeader>
+        Home
+    </FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentLabel Typo="Typography.H1">Welcome to my Blazor Aspire demo.</FluentLabel>
+
+        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+            <FluentIcon Value="@(new Icons.Regular.Size32.Warning().WithColor("darkorange"))" />
+            <FluentLabel Typo="Typography.H5" >
+                Under Construction
+            </FluentLabel>
+        </FluentStack>
+
+        <FluentLabel Typo="Typography.Subject">
+            - Aspire does not yet support .NET 10.0<br />
+            - Projects will be upgraded to use Aspire when it supports .NET 10.0.<br />
+            - For now, the demo is configured for a multiple project startup with the ApiService and WebApp.<br />
+            - Some of the .NET 9.0 demos will not be available until Aspire supports .NET 10.0.
+        </FluentLabel>
+
+        <FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Center">
+            <FluentAnchor Href="https://www.nuget.org/profiles/djmarquardt" Target="_blank">
+                My NuGet packages
+            </FluentAnchor>
+
+            <FluentAnchor Href="https://github.com/marqdouj" Target="_blank">
+                My GitHub account
+            </FluentAnchor>
+        </FluentStack>
+    </FluentStack>
+</FluentLayout>

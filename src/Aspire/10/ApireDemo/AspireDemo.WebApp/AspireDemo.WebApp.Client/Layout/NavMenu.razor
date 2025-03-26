@@ -1,0 +1,30 @@
+﻿@rendermode InteractiveAuto
+
+<div class="navmenu">
+    <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
+    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
+    <nav class="sitenav" aria-labelledby="main-menu">
+        <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
+            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
+        
+            <FluentNavGroup Title="How-To" Icon="@(new Icons.Regular.Size20.DesignIdeas())" IconColor="Color.Accent">
+                <FluentNavLink Href="how-to/app-icon" Icon="@(new Icons.Regular.Size20.Image())" IconColor="Color.Accent">App Icon</FluentNavLink>
+                <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size20.NumberSymbolSquare())" IconColor="Color.Accent">In-Memory State</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.WeatherPartlyCloudyDay())" IconColor="Color.Accent">API/StreamRendering</FluentNavLink>
+            </FluentNavGroup>
+
+            <FluentNavGroup Title="My NuGet" Icon="@(new Icons.Regular.Size20.CircleMultipleConcentric())" IconColor="Color.Accent">
+                <FluentNavLink Href="nuget-clr" Icon="@(new Icons.Regular.Size20.Subtitles())" IconColor="Color.Accent">CLR Common</FluentNavLink>
+                <FluentNavLink Href="nuget-email" Icon="@(new Icons.Regular.Size20.Mail())" IconColor="Color.Accent">Email</FluentNavLink>
+                <FluentNavLink Href="nuget-fluent-ui" Icon="@(new Icons.Regular.Size20.Image())" IconColor="Color.Accent">Fluent UI</FluentNavLink>
+                <FluentNavLink Href="nuget-geolocation" Icon="@(new Icons.Regular.Size20.Globe())" IconColor="Color.Accent">Geolocation</FluentNavLink>
+                <FluentNavLink Href="nuget-resize" Icon="@(new Icons.Regular.Size20.Resize())" IconColor="Color.Accent">Resize Observer</FluentNavLink>
+            </FluentNavGroup>
+        </FluentNavMenu>
+    </nav>
+</div>
+
+@code {
+    private bool expanded = true;
+
+}

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Marqdouj.CLRCommon" Version="8.8.2" />
+    <PackageReference Include="Marqdouj.FluentUI" Version="9.0.3" />
+    <PackageReference Include="Marqdouj.Html.Geolocation" Version="8.8.0" />
+    <PackageReference Include="Marqdouj.Html.ResizeObserver" Version="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0-preview.2.25164.1" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.7" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AspireDemo.Components\AspireDemo.Components.csproj" />
+  </ItemGroup>
+
+</Project>

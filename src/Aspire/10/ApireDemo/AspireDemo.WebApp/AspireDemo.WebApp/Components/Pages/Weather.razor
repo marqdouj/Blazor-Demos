@@ -1,0 +1,55 @@
+﻿@page "/weather"
+@rendermode InteractiveAuto
+@attribute [StreamRendering]
+@inject IApiServiceClient WeatherApi
+
+<PageTitle>Weather</PageTitle>
+
+<FluentLayout>
+    <FluentHeader>Weather</FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentLabel Typo="Typography.H5">Rendermode: <code>InteractiveAuto</code> </FluentLabel>
+
+        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+            <FluentLabel Typo="Typography.H5">
+                This component demonstrates retrieving data from an API service, and using 
+                </FluentLabel>
+            <FluentAnchor 
+                Target="_blank"
+                Href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/rendering?view=aspnetcore-10.0#streaming-rendering">
+                StreamRendering
+            </FluentAnchor>
+        </FluentStack>
+
+        <FluentButton Appearance="Appearance.Accent" @onclick="async () => await OnInitializedAsync()">Refresh</FluentButton>
+
+        <div style="display: table; table-layout: fixed; width: 100%;">
+            <div style="overflow-x: auto;">
+                <FluentDataGrid Items="@forecasts?.AsQueryable()" Loading="@loading" Style="min-width: max-content;" TGridItem="WeatherForecast">
+                    <ChildContent>
+                        <PropertyColumn Title="Date" Property="@(c => c!.Date)" Sortable="true" Align="Align.Start" />
+                        <PropertyColumn Title="Temp. (C)" Property="@(c => c!.TemperatureC)" Sortable="true" Align="Align.Center" />
+                        <PropertyColumn Title="Temp. (F)" Property="@(c => c!.TemperatureF)" Sortable="true" Align="Align.Center" />
+                        <PropertyColumn Title="Summary" Property="@(c => c!.Summary)" Sortable="true" Align="Align.End" />
+                    </ChildContent>
+                    <EmptyContent>
+                        <FluentLabel Typo="Typography.H6">No data to display.</FluentLabel>
+                    </EmptyContent>
+                </FluentDataGrid>
+            </div>
+        </div>
+    </FluentStack>
+</FluentLayout>
+
+@code {
+    private List<WeatherForecast>? forecasts;
+    private bool loading => forecasts == null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = null;
+        await Task.Delay(500); // Simulate loading delay
+        forecasts = await WeatherApi.Weather.GetWeatherAsync();
+    }
+}

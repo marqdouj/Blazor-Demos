@@ -1,0 +1,51 @@
+﻿@page "/nuget-fluent-ui"
+@rendermode InteractiveAuto
+
+<PageTitle>Fluent UI</PageTitle>
+
+<FluentLayout>
+    <FluentHeader>Fluent UI</FluentHeader>
+    
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+            <FluentLabel Typo="Typography.H5">This page demonstrates the ThemeSwitch and Slideshow components </FluentLabel>
+            <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.FluentUI/"
+                          Target="_blank">
+                NuGet
+            </FluentAnchor>
+            <FluentAnchor Href="https://github.com/marqdouj/FluentUI"
+                          Target="_blank">
+                GitHub
+            </FluentAnchor>
+        </FluentStack>
+
+        <FluentCard>
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel>ThemeSwitch (Light/Dark):</FluentLabel>
+                <ThemeSwitch />
+            </FluentStack>
+        </FluentCard>
+
+        <FluentCard>
+            <FluentStack Orientation="Orientation.Vertical">
+                <FluentLabel>Slideshow:</FluentLabel>
+                <div>
+                    <Slideshow Images="@images" Width="400" Height="200" AutoSlideSeconds="3"/>
+                </div>
+            </FluentStack>
+
+        </FluentCard>
+    </FluentStack>
+</FluentLayout>
+
+@code {
+    private readonly List<SlideshowImage> images = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 1; i < 7; i++)
+        {
+            images.Add(new SlideshowImage(i, $"./_content/AspireDemo.Components/banner/Banner{i}.png", $"Image #{i}"));
+        }
+    }
+}
