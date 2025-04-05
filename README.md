@@ -4,7 +4,7 @@
 - This demo uses Docker Desktop: https://www.docker.com/products/docker-desktop/
 
 ## Overview
-- The demos contain examples/links on how to use some of the NuGet packages I have created.
+- The demos contain examples/links on how to use some of the [NuGet](https://www.nuget.org/packages?q=marqdouj) packages I have created.
 - It also contains a couple of 'How To' examples on things I found useful in Blazor.
 
 ### .NET 10.0
