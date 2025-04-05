@@ -7,50 +7,48 @@
         Home
     </FluentHeader>
 
-    <FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Vertical" >
         <FluentLabel Typo="Typography.H1">Welcome to my Blazor Aspire demo.</FluentLabel>
 
-        <FluentStack VerticalAlignment="VerticalAlignment.Center">
-            <FluentIcon Value="@(new Icons.Regular.Size32.Warning().WithColor("darkorange"))" />
-            <FluentLabel Typo="Typography.H5" >
-                Under Construction
-            </FluentLabel>
-        </FluentStack>
-
-        <FluentLabel Typo="Typography.Subject">
-            - Aspire does not yet support .NET 10.0<br />
-            - Projects will be upgraded to use Aspire when it supports .NET 10.0.<br />
-            - For now, the demo is configured for a multiple project startup with the ApiService and WebApp.<br />
-            - Some of the .NET 9.0 demos will not be available until Aspire supports .NET 10.0.
-        </FluentLabel>
-
         <FluentCard>
-            <FluentStack VerticalAlignment="VerticalAlignment.Center">
-                <FluentLabel Typo="Typography.Subject">
-                    Launch Open API:
-                </FluentLabel>
-                <FluentAnchor Href="https://localhost:7093/scalar" Target="_blank">
-                    Scalar
-                </FluentAnchor>
-                <FluentLabel>or</FluentLabel>
-                <FluentAnchor Href="https://localhost:7093/swagger" Target="_blank">
-                    Swagger
-                </FluentAnchor>
-            </FluentStack>
-
+            <FluentLabel Typo="Typography.H5">Open API</FluentLabel>
+            <br />
+            <FluentLabel Typo="Typography.Subject">
+                Both Scalar and Swagger are configured for Open API.<br />
+                In the Aspire dashboard, Scalar is the default. <br />
+                You can use either of the following links to launch the configurations:
+            </FluentLabel>
+            <br />
+            <FluentAnchor Href="https://localhost:7525/scalar" Target="_blank">
+                Scalar
+            </FluentAnchor>
+            <FluentAnchor Href="https://localhost:7525/swagger" Target="_blank">
+                Swagger
+            </FluentAnchor>
+            <br /><br />
             <FluentAnchor Href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/using-openapi-documents?view=aspnetcore-10.0" Target="_blank">
                 Open API Docs
             </FluentAnchor>
         </FluentCard>
 
         <FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Center">
-            <FluentAnchor Href="https://www.nuget.org/profiles/djmarquardt" Target="_blank">
-                My NuGet packages
-            </FluentAnchor>
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel Typo="Typography.H5">
+                    My NuGet packages are listed on
+                </FluentLabel>
+                <FluentAnchor Href="https://www.nuget.org/packages?q=marqdouj" Target="_blank">
+                    NuGet
+                </FluentAnchor>
+            </FluentStack>
 
-            <FluentAnchor Href="https://github.com/marqdouj" Target="_blank">
-                My GitHub account
-            </FluentAnchor>
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel Typo="Typography.H5">
+                    My projects are listed on 
+                </FluentLabel>
+                <FluentAnchor Href="https://github.com/marqdouj" Target="_blank">
+                    GitHub
+                </FluentAnchor>
+            </FluentStack>
         </FluentStack>
     </FluentStack>
 </FluentLayout>

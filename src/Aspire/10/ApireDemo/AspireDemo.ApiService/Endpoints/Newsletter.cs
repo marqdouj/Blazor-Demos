@@ -25,9 +25,7 @@ namespace AspireDemo.ApiService.Endpoints
             {
                 email = GetEmail(email);
                 var message = service.BuildNewsletterMessage(email, true);
-
-                await Task.CompletedTask;
-                //await service.SendEmail(message);
+                await service.SendEmail(message);
             })
             .WithName("Subscribe");
 
@@ -35,9 +33,7 @@ namespace AspireDemo.ApiService.Endpoints
             {
                 email = GetEmail(email);
                 var message = service.BuildNewsletterMessage(email, false);
-
-                await Task.CompletedTask;
-                //await service.SendEmail(message);
+                await service.SendEmail(message);
             })
             .WithName("Unsubscribe");
         }

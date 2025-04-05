@@ -1,4 +1,5 @@
-﻿using AspireDemo.ApiClient;
+using AspireDemo.ApiClient;
+using AspireDemo.Components.Other.Canvas;
 using AspireDemo.WebApp.Client.Pages.HowTo;
 using AspireDemo.WebApp.Components;
 using Marqdouj.Html.Geolocation;
@@ -8,23 +9,31 @@ using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+builder.AddRedisOutputCache("cache");
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
 builder.Services.AddFluentUIComponents();
 
 builder.Services.AddHttpClient<IApiServiceClient, ApiServiceClient>(client =>
 {
-    //For Aspire (not yet supported in .NET 10) client.BaseAddress = new("https+http://apiservice");
-    client.BaseAddress = new("https://localhost:7093");
+    // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
+    // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+    client.BaseAddress = new("https+http://apiservice");
 });
 
 builder.Services.AddScoped<ResizeObserverService>();
 builder.Services.AddScoped<IGeolocationService, GeolocationService>();
+builder.Services.AddScoped<CanvasDemoState>();
 builder.Services.AddScoped<CounterState>();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

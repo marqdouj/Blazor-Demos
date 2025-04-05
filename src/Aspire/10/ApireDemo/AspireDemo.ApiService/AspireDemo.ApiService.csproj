@@ -2,21 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>b7f1faac-8ecd-46c2-8118-447cc1a25921</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Azure.Communication.Email" Version="1.1.0-beta.2" />
-	<PackageReference Include="Marqdouj.Aspire.MailKit.Client" Version="8.1.2" />
-	<PackageReference Include="Marqdouj.CLRCommon" Version="8.8.2" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0-preview.2.25164.1" />
-    <PackageReference Include="Scalar.AspNetCore" Version="2.1.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.0" />
+    <ProjectReference Include="..\AspireDemo.ApiClient\AspireDemo.ApiClient.csproj" />
+    <ProjectReference Include="..\AspireDemo.ServiceDefaults\AspireDemo.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AspireDemo.ApiClient\AspireDemo.ApiClient.csproj" />
+    <PackageReference Include="Azure.Communication.Email" Version="1.1.0-beta.2" />
+	<PackageReference Include="Marqdouj.Aspire.MailKit.Client" Version="8.1.2" />
+	<PackageReference Include="Marqdouj.CLRCommon" Version="8.8.2" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0-preview.2.25164.1" />
+	<PackageReference Include="Scalar.AspNetCore" Version="2.1.6" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.0" />
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\AspireDemo.ApiClient\AspireDemo.ApiClient.csproj" />
+    <ProjectReference Include="..\..\AspireDemo.ServiceDefaults\AspireDemo.ServiceDefaults.csproj" />
     <ProjectReference Include="..\AspireDemo.WebApp.Client\AspireDemo.WebApp.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0-preview.2.25164.1" />
   </ItemGroup>
@@ -15,5 +16,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.7" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.7" />
+    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.1.0" />
   </ItemGroup>
 </Project>

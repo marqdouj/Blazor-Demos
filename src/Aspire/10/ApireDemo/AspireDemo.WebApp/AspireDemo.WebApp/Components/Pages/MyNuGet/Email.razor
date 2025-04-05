@@ -1,5 +1,6 @@
 ﻿@page "/nuget-email"
-@rendermode InteractiveAuto
+
+@rendermode InteractiveServer
 
 <PageTitle>Email</PageTitle>
 
@@ -7,14 +8,45 @@
     <FluentHeader>Email Service</FluentHeader>
 
     <FluentStack Orientation="Orientation.Vertical">
-        <FluentLabel Typo="Typography.H5">Rendermode: <code>InteractiveAuto</code> </FluentLabel>
+        <FluentLabel Typo="Typography.H5">
+            This page demonstrates a development mode email service using MailDev/MailKit.
+            I have created RCL wrappers around them to work with .NET Aspire
+        </FluentLabel>
 
-        <FluentStack VerticalAlignment="VerticalAlignment.Center">
-            <FluentIcon Value="@(new Icons.Regular.Size32.Warning().WithColor("darkorange"))" />
-            <FluentLabel Typo="Typography.H5">
-                Under Construction (NOTE: Emails are not actually sent; will not be configured until Aspire supports .NET 10.0.)
-            </FluentLabel>
-        </FluentStack>
+        <FluentLabel Typo="Typography.H5">
+            The ApiService <code>Program.cs</code> contains a custom exception handler that
+            uses the email service to send messages to the development team when an unhandled
+            exception occurs in the API. 
+            This can be tested using the <code>/development/throw-exception</code> endpoint.
+        </FluentLabel>
+        <br />
+        <FluentGrid>
+            <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.MailDev.Host/"
+                          Target="_blank">
+                NuGet MailDev
+            </FluentAnchor>
+            <FluentAnchor Href="https://github.com/marqdouj/Marqdouj.MailDev"
+                          Target="_blank">
+                GitHub MailDev
+            </FluentAnchor>
+            <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.Aspire.MailKit.Client/"
+                          Target="_blank">
+                NuGet MailKit
+            </FluentAnchor>
+            <FluentAnchor Href="https://github.com/marqdouj/Marqdouj.MailKit"
+                          Target="_blank">
+                GitHub MailKit
+            </FluentAnchor>
+        </FluentGrid>
+
+        <br />
+
+        <FluentLabel Typo="Typography.H5">Open up the <code>'MailDev'</code> resource to view emails</FluentLabel>
+        <FluentLabel Typo="Typography.H5">
+            The code behind is also configured to run Azure email in production (if configured).
+        </FluentLabel>
+
+        <br />
 
         <FluentLabel>@subscribedMessage</FluentLabel>
         <AspireDemo.Components.MyNuGet.Newsletter SubscribeChanged="@OnSubscribeChanged" />

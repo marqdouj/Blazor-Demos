@@ -1,7 +1,0 @@
-<Solution>
-  <Project Path="AspireDemo.ApiClient/AspireDemo.ApiClient.csproj" Id="a59eca9a-4f43-4047-9c55-5ecb24f0b08b" />
-  <Project Path="AspireDemo.ApiService/AspireDemo.ApiService.csproj" Id="8c87c4e4-f200-416c-a73c-357133950e5f" />
-  <Project Path="AspireDemo.Components/AspireDemo.Components.csproj" Id="604917d5-ca07-4065-a3cd-beff1bb2b9de" />
-  <Project Path="AspireDemo.WebApp/AspireDemo.WebApp.Client/AspireDemo.WebApp.Client.csproj" />
-  <Project Path="AspireDemo.WebApp/AspireDemo.WebApp/AspireDemo.WebApp.csproj" />
-</Solution>

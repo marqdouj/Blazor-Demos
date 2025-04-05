@@ -1,0 +1,16 @@
+﻿.container {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    column-gap: 3px;
+    row-gap: 3px;
+    margin-top: 3px;
+    margin-bottom: 1px;
+    overflow-x: auto;
+}
+
+/* Ensure all the grid images are the same size, and centered */
+.grid-img {
+    height: 1rem;
+    margin: auto;
+    border: 1px solid var(--neutral-layer-3);
+}

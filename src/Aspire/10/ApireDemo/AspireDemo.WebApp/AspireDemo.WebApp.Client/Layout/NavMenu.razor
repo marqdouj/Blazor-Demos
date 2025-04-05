@@ -6,7 +6,7 @@
     <nav class="sitenav" aria-labelledby="main-menu">
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
             <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
-        
+
             <FluentNavGroup Title="How-To" Icon="@(new Icons.Regular.Size20.DesignIdeas())" IconColor="Color.Accent">
                 <FluentNavLink Href="how-to/app-icon" Icon="@(new Icons.Regular.Size20.Image())" IconColor="Color.Accent">App Icon</FluentNavLink>
                 <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size20.NumberSymbolSquare())" IconColor="Color.Accent">In-Memory State</FluentNavLink>
@@ -19,6 +19,10 @@
                 <FluentNavLink Href="nuget-fluent-ui" Icon="@(new Icons.Regular.Size20.Image())" IconColor="Color.Accent">Fluent UI</FluentNavLink>
                 <FluentNavLink Href="nuget-geolocation" Icon="@(new Icons.Regular.Size20.Globe())" IconColor="Color.Accent">Geolocation</FluentNavLink>
                 <FluentNavLink Href="nuget-resize" Icon="@(new Icons.Regular.Size20.Resize())" IconColor="Color.Accent">Resize Observer</FluentNavLink>
+            </FluentNavGroup>
+
+            <FluentNavGroup Title="Other" Icon="@(new Icons.Regular.Size20.ClothesHanger())" IconColor="Color.Accent">
+                <FluentNavLink Href="other-canvas" Icon="@(new Icons.Regular.Size20.DrawImage())" IconColor="Color.Accent">Html Canvas</FluentNavLink>
             </FluentNavGroup>
         </FluentNavMenu>
     </nav>
