@@ -21,6 +21,10 @@ if (app.Environment.IsDevelopment())
         options.DefaultFonts = false; // Disable default fonts to avoid download unnecessary fonts
         //options.Servers = []; //Required in Aspire
     });
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+    });
 }
 
 app.UseHttpsRedirection();
