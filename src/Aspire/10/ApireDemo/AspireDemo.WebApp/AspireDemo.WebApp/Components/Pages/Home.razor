@@ -25,16 +25,21 @@
         </FluentLabel>
 
         <FluentCard>
-            <FluentLabel Typo="Typography.Subject">
-                Launch API Service
-            </FluentLabel>
+            <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                <FluentLabel Typo="Typography.Subject">
+                    Launch Open API:
+                </FluentLabel>
+                <FluentAnchor Href="https://localhost:7093/scalar" Target="_blank">
+                    Scalar
+                </FluentAnchor>
+                <FluentLabel>or</FluentLabel>
+                <FluentAnchor Href="https://localhost:7093/swagger" Target="_blank">
+                    Swagger
+                </FluentAnchor>
+            </FluentStack>
 
-            <FluentAnchor Href="https://localhost:7093/scalar" Target="_blank">
-                Scalar
-            </FluentAnchor>
-
-            <FluentAnchor Href="https://localhost:7093/swagger" Target="_blank">
-                Swagger
+            <FluentAnchor Href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/using-openapi-documents?view=aspnetcore-10.0" Target="_blank">
+                Open API Docs
             </FluentAnchor>
         </FluentCard>
 
