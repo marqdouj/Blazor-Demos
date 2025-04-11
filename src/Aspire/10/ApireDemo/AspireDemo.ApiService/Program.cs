@@ -107,7 +107,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapDevelopment(app.Environment.IsDevelopment());
+app.MapDevelopment();
 app.MapNewsletterApi();
 app.MapWeatherApi();
 app.MapDefaultEndpoints();

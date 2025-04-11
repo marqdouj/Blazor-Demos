@@ -2,9 +2,9 @@
 {
     internal static class Development
     {
-        public static void MapDevelopment(this WebApplication app, bool isDevelopment)
+        public static void MapDevelopment(this WebApplication app)
         {
-            if (!isDevelopment)
+            if (!app.Environment.IsDevelopment())
                 return;
 
             app.MapGet("/development/throw-exception", () =>

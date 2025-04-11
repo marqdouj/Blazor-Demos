@@ -10,6 +10,8 @@ using Microsoft.FluentUI.AspNetCore.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+builder.Services.AddOutputCache();
 builder.AddRedisOutputCache("cache");
 
 // Add services to the container.
@@ -33,8 +35,6 @@ builder.Services.AddScoped<CounterState>();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -51,10 +51,15 @@ app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 
+app.UseOutputCache();
+
 app.MapStaticAssets();
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(AspireDemo.WebApp.Client._Imports).Assembly);
+
+app.MapDefaultEndpoints();
 
 app.Run();

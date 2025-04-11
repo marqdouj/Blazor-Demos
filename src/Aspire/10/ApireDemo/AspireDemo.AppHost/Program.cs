@@ -13,7 +13,8 @@ var maildev = builder.AddMailDev(
     password: mailDevPassword);
 
 var apiService = builder.AddProject<Projects.AspireDemo_ApiService>("apiservice")
-    .WithReference(maildev);
+    .WithReference(maildev)
+    .WithHttpsHealthCheck("/health");
 
 builder.AddProject<Projects.AspireDemo_WebApp>("webfrontend")
     .WithExternalHttpEndpoints()
@@ -21,6 +22,7 @@ builder.AddProject<Projects.AspireDemo_WebApp>("webfrontend")
     .WaitFor(cache)
     .WithReference(apiService)
     .WaitFor(apiService)
-    .WithReference(maildev);
+    .WithReference(maildev)
+    .WithHttpsHealthCheck("/health");
 
 builder.Build().Run();
