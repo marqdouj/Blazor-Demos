@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Marqdouj.CLRCommon" Version="8.8.2" />
-    <PackageReference Include="Marqdouj.FluentUI" Version="9.0.3" />
+    <PackageReference Include="Marqdouj.FluentUI" Version="9.1.0" />
     <PackageReference Include="Marqdouj.Html.Geolocation" Version="8.8.0" />
     <PackageReference Include="Marqdouj.Html.ResizeObserver" Version="9.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0-preview.3.25172.1" />

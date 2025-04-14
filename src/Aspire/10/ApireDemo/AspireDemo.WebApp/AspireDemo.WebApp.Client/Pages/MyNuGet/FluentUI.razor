@@ -8,7 +8,7 @@
     
     <FluentStack Orientation="Orientation.Vertical">
         <FluentStack VerticalAlignment="VerticalAlignment.Center">
-            <FluentLabel Typo="Typography.H5">This page demonstrates the ThemeSwitch and Slideshow components </FluentLabel>
+            <FluentLabel Typo="Typography.H5">This page demonstrates my custom Slideshow and Theme components </FluentLabel>
             <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.FluentUI/"
                           Target="_blank">
                 NuGet
@@ -19,22 +19,39 @@
             </FluentAnchor>
         </FluentStack>
 
-        <FluentCard>
-            <FluentStack VerticalAlignment="VerticalAlignment.Center">
-                <FluentLabel>ThemeSwitch (Light/Dark):</FluentLabel>
-                <ThemeSwitch />
-            </FluentStack>
-        </FluentCard>
+        <FluentTabs>
+            <FluentTab Label="Slideshow">
+                <FluentCard>
+                    <FluentStack Orientation="Orientation.Vertical">
+                        <FluentLabel>Slideshow:</FluentLabel>
+                        <div>
+                            <Slideshow Images="@images" Width="400" Height="200" AutoSlideSeconds="3" />
+                        </div>
+                    </FluentStack>
+                </FluentCard>
+            </FluentTab>
 
-        <FluentCard>
-            <FluentStack Orientation="Orientation.Vertical">
-                <FluentLabel>Slideshow:</FluentLabel>
-                <div>
-                    <Slideshow Images="@images" Width="400" Height="200" AutoSlideSeconds="3"/>
-                </div>
-            </FluentStack>
+            <FluentTab Label="Theme">
+                <FluentCard>
+                    <FluentStack Orientation="Orientation.Vertical">
+                        <FluentCard AreaRestricted="false">
+                            <FluentLabel>Theme Switch (Toggle Light/Dark)</FluentLabel>
+                            <ThemeSwitch />
+                        </FluentCard>
 
-        </FluentCard>
+                        <FluentCard AreaRestricted="false">
+                            <FluentLabel>Theme Mode (System/Light/Dark)</FluentLabel>
+                            <ThemeMode />
+                        </FluentCard>
+
+                        <FluentCard AreaRestricted="false">
+                            <FluentLabel>Theme Color (Office Color)</FluentLabel>
+                            <ThemeColor />
+                        </FluentCard>
+                    </FluentStack>
+                </FluentCard>
+            </FluentTab>
+        </FluentTabs>
     </FluentStack>
 </FluentLayout>
 

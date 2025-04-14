@@ -17,7 +17,7 @@
 	<PackageReference Include="Marqdouj.Aspire.MailKit.Client" Version="8.1.2" />
 	<PackageReference Include="Marqdouj.CLRCommon" Version="8.8.2" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0-preview.3.25172.1" />
-	<PackageReference Include="Scalar.AspNetCore" Version="2.1.11" />
+	<PackageReference Include="Scalar.AspNetCore" Version="2.1.13" />
 	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
   </ItemGroup>
 
