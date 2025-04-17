@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Marqdouj.CLRCommon" Version="8.8.2" />
+    <PackageReference Include="Marqdouj.FluentUI" Version="10.0.0-preview3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0-preview.3.25172.1" />
 	<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.8" />
 	<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.8" />

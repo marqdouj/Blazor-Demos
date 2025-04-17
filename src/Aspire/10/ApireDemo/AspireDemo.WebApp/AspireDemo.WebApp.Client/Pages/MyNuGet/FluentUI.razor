@@ -1,5 +1,5 @@
 ﻿@page "/nuget-fluent-ui"
-@rendermode InteractiveAuto
+@rendermode InteractiveServer
 
 <PageTitle>Fluent UI</PageTitle>
 
@@ -32,24 +32,7 @@
             </FluentTab>
 
             <FluentTab Label="Theme">
-                <FluentCard>
-                    <FluentStack Orientation="Orientation.Vertical">
-                        <FluentCard AreaRestricted="false">
-                            <FluentLabel>Theme Switch (Toggle Light/Dark)</FluentLabel>
-                            <ThemeSwitch />
-                        </FluentCard>
-
-                        <FluentCard AreaRestricted="false">
-                            <FluentLabel>Theme Mode (System/Light/Dark)</FluentLabel>
-                            <ThemeMode />
-                        </FluentCard>
-
-                        <FluentCard AreaRestricted="false">
-                            <FluentLabel>Theme Color (Office Color)</FluentLabel>
-                            <ThemeColor />
-                        </FluentCard>
-                    </FluentStack>
-                </FluentCard>
+                <FluentUITheme />
             </FluentTab>
         </FluentTabs>
     </FluentStack>
