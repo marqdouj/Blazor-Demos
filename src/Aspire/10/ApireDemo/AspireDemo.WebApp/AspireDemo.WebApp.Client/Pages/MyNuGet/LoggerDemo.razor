@@ -7,13 +7,13 @@
     <FluentHeader>JS Logger</FluentHeader>
 
     <FluentStack Orientation="Orientation.Vertical">
-        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentStack Orientation="Orientation.Vertical">
             <FluentLabel Typo="Typography.H5">This page demonstrates the JavaScript Logger </FluentLabel>
-            <br />
             <FluentLabel>
                 For the purpose of this demo, both type of loggers are configured.
-                normally you would only configure one type of logger service (see Program.cs).
+                Normally you would only configure one type of logger service (see Program.cs).
             </FluentLabel>
+
             <FluentAnchor Href="https://www.nuget.org/packages/Marqdouj.JSLogger/"
                           Target="_blank">
                 NuGet
@@ -70,11 +70,11 @@
     {
         if (useService)
         {
-            await JSLogger.LogRaw("Test 'Raw' from Service", "color: orange; font-size: 20px;");
+            await JSLoggerS.LogRaw("Test 'Raw' from Global Script", "color: orange; font-size: 20px;");
         }
         else
         {
-            await JSLoggerS.LogRaw("Test 'Raw' from Global Script", "color: orange; font-size: 20px;");
+            await JSLogger.LogRaw("Test 'Raw' from Module", "color: orange; font-size: 20px;");           
         }
     }
 
@@ -82,20 +82,21 @@
     {
         if (useService)
         {
-            await JSLogger.LogRaw("Test 'Raw' from Service", "color: orange; font-size: 20px;");
-            await JSLogger.Test("Test All from Service");
+            await JSLoggerS.LogRaw("Test 'Raw' from Global Script", "color: orange; font-size: 20px;");
+            await JSLoggerS.Test("Test All from Global Script");
         }
         else
         {
-            await JSLoggerS.LogRaw("Test 'Raw' from Global Script", "color: orange; font-size: 20px;");
-            await JSLoggerS.Test("Test All from Global Script");
+            await JSLogger.LogRaw("Test 'Raw' from Module", "color: orange; font-size: 20px;");
+            await JSLogger.Test("Test All from Module");
         }
     }
 
     private async Task TestLogger(LogLevel level, bool useService = false)
     {
-        IJSLogger logger = useService ? JSLogger : JSLoggerS!;
-        var eventName = useService ? "Logger Module" : "Logger Script";
+        IJSLogger logger = useService ? JSLoggerS : JSLogger;
+        var source = useService ? "Global Script" : "Module";
+        var eventName = $"TestLogger-{source}";
 
         switch (level)
         {
